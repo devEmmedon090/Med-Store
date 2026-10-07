@@ -24,7 +24,12 @@ if(ENV.NODE_ENV === "production"){
     });
 }
 
-app.listen(ENV.PORT, () => {
-    console.log("Server is Up and running on port " + ENV.PORT) // Starting the server and listening on port 3000, logging a message to the console when the server is running
-    connectDB();
-}); 
+
+const startServer = async () => {
+    await connectDB(); // Connecting to the database
+    app.listen(ENV.PORT, () => {
+        console.log(`Server is running on port ${ENV.PORT}`); // Starting the server and logging the port number
+    });
+};
+
+startServer(); // Calling the startServer function to initiate the server
